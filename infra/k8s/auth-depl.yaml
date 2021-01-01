@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: auth-depl
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: auth
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: tmprimitivo/auth
+        image: tmprimitivo/concert-tickets-app/auth
         
 ---
 # Defaults to ClusterIP service
@@ -29,4 +29,4 @@ spec:
   - name: auth
     protocol: TCP
     port: 3000
-    containerPort: 3000
+    targetPort: 3000
