@@ -3,7 +3,7 @@ import {body, validationResult} from 'express-validator';
 import { BadRequestError } from '../errors/bad-request.error';
 import { RequestValidationError } from '../errors/request-validation.error';
 import { User } from '../models/user.model';
-
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -35,6 +35,18 @@ router.post('/api/users/signup',
 
         const user = User.build({ email, password });
         await user.save();
+
+        // Generate JWT
+        const userJwt = jwt.sign({
+            id: user.id,
+            email: user.email
+        }, 'mypass');
+
+        // Store the jwt on session object (only if you query with https ! Otherwise, no cookie.)
+        // we're doing that because the client will be server-side rendered, so it's easier
+        // But it is also possible to do that with a client-side webclient
+        // The jwt is fully base64 encoded. So decode it first and then you can go to jwt.io to read it
+        req.session = {jwt: userJwt};
 
         res.status(201).send(user);
 

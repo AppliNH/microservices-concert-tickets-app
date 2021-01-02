@@ -3,6 +3,8 @@ import 'express-async-errors'; // handling errors from async jobs. Just import i
 import {json} from 'body-parser';
 import {connect} from 'mongoose';
 
+import cookieSession from 'cookie-session';
+
 import {currentUserRouter} from './routes/current-user';
 import { signOutRouter } from './routes/signout';
 import { signUpRouter } from './routes/signup';
@@ -12,7 +14,14 @@ import NotFoundError from './errors/not-found.error';
 
 
 const app = express();
+app.set('trust proxy', true); // Makes sure that express is being awared of being behind the nginx proxy and accepts trafic
 app.use(json());
+app.use(
+    cookieSession({
+        signed: false,
+        secure: true // Will only return cookie if the query is made with https !!
+    })
+); 
 
 // Routes
 app.use(
