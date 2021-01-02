@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors'; // handling errors from async jobs. Just import it like it, RIGHT AFTER express
 import {json} from 'body-parser';
-import mongoose from 'mongoose';
+import {connect} from 'mongoose';
 
 import {currentUserRouter} from './routes/current-user';
 import { signOutRouter } from './routes/signout';
@@ -9,7 +9,6 @@ import { signUpRouter } from './routes/signup';
 import { signInRouter } from './routes/signin';
 import { errorHandler } from './middlewares/error-handler';
 import NotFoundError from './errors/not-found.error';
-
 
 
 const app = express();
@@ -36,7 +35,7 @@ app.use(errorHandler);
 // startup script
 const start = async() => {
     try {
-        await mongoose.connect('mongodb://auth-mongo-service:27017/', {
+        await connect('mongodb://auth-mongo-service:27017/', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true

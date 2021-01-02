@@ -1,4 +1,5 @@
-import mongoose,  { Schema, Document, Model } from 'mongoose';
+import  { Schema, Document, Model, model } from 'mongoose';
+import { Password } from '../utils/password';
 
 // Model(Attributes): Document
 
@@ -20,7 +21,7 @@ interface UserModel extends Model<UserDocument> {
 }
 
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     email: {
         type: String, // Capital S cause refering to the constructor String
         required: true
@@ -31,11 +32,21 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+// Middleware on saving to db
+userSchema.pre("save", async function(done) {
+    if(this.isModified('password')) {
+        // Hashing the password before saving to db
+        const hashed = await Password.toHash(this.get('password'));
+        this.set('password', hashed);
+    }
+    done();
+});
+
 userSchema.statics.build = (attributes: UserAttributes) => {
     return new User(attributes);
 };
 
-const User = mongoose.model<UserDocument, UserModel>("User", userSchema);
+const User = model<UserDocument, UserModel>("User", userSchema);
 
 
 export { User }
