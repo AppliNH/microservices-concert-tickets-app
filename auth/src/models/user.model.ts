@@ -14,7 +14,7 @@ interface UserDocument extends Document {
     password: string;
 }
 
-// Describe the properties of the user model
+// Describes the properties of the user model
 interface UserModel extends Model<UserDocument> {
     build(attributes: UserAttributes): UserDocument;
 }
