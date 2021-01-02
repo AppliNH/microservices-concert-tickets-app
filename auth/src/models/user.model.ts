@@ -1,4 +1,24 @@
-import mongoose from 'mongoose';
+import mongoose,  { Schema, Document, Model } from 'mongoose';
+
+// Model(Attributes): Document
+
+// Describes the required properties to create a new user
+interface UserAttributes{
+    email: string;
+    password: string;
+}
+
+// Describes the properties of a user document (user in mongo)
+interface UserDocument extends Document {
+    email: string;
+    password: string;
+}
+
+// Describe the properties of the user model
+interface UserModel extends Model<UserDocument> {
+    build(attributes: UserAttributes): UserDocument;
+}
+
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -11,6 +31,11 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model("User", userSchema);
+userSchema.statics.build = (attributes: UserAttributes) => {
+    return new User(attributes);
+};
+
+const User = mongoose.model<UserDocument, UserModel>("User", userSchema);
+
 
 export { User }
