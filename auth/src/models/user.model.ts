@@ -30,6 +30,16 @@ const userSchema = new Schema({
         type: String,
         required: true
     }
+},
+{
+    toJSON:{ // Overwrites (or overloads) toJSON function used by mongoose when it comes to turn the data into JSON (for response)
+        transform(doc, ret) { // doc is the initial document, ret is the output
+            ret.id = ret._id;
+            delete ret._id;
+            delete ret.password; // delete password from JSON response
+            delete ret.__v;
+        }
+    }
 });
 
 // Middleware on saving to db

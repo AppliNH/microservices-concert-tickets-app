@@ -53,9 +53,6 @@ router.post('/api/users/signup',
 
         res.status(201).send(user);
 
-
-
-
 });
 
 
