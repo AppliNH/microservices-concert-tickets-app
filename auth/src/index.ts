@@ -43,6 +43,11 @@ app.use(errorHandler);
 
 // startup script
 const start = async() => {
+
+    if (!process.env.JWT_KEY) {
+        throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.")
+    }
+
     try {
         await connect('mongodb://auth-mongo-service:27017/', {
             useNewUrlParser: true,
