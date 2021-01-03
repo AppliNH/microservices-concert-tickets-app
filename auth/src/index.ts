@@ -45,7 +45,7 @@ app.use(errorHandler);
 const start = async() => {
 
     if (!process.env.JWT_KEY) {
-        throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.")
+        throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.");
     }
 
     try {
