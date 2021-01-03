@@ -4,6 +4,7 @@ import { BadRequestError } from '../errors/bad-request.error';
 import { User } from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import { validateRequest } from '../middlewares/validate-request';
+import { generateJWT } from '../utils/jwt';
 
 const router = express.Router();
 
@@ -33,13 +34,7 @@ router.post('/api/users/signup',
         await user.save();
 
         // Generate JWT
-        const userJwt = jwt.sign(
-            {
-                id: user.id,
-                email: user.email
-            }, 
-            process.env.JWT_KEY! // The ! lets TS know that we made sure to throw error (index.ts) if this wasn't defined
-        );
+        const userJwt = generateJWT(user.id, user.email);
 
         // Store the jwt on session object (only if you query with https ! Otherwise, no cookie.)
         // we're doing that because the client will be server-side rendered, so it's easier
