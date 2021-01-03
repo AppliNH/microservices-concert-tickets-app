@@ -4,10 +4,7 @@ import { BadRequestError } from '../errors/bad-request.error';
 
 const router = express.Router();
 
-router.get('/api/users/currentuser', 
-    [
-
-    ],
+router.get('/api/users/currentuser',
     (req: Request, res: Response) => {
         if(!req.session?.jwt) {
             throw new BadRequestError('Wrong credentials (no token)');
