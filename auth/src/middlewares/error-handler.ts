@@ -11,7 +11,6 @@ export const errorHandler = (
     ) => {
 
         if (err instanceof CustomError) {
-            console.warn(err);
             return res.status(err.statusCode).send({errors: err.serializeErrors()})        
         }
 
