@@ -18,7 +18,7 @@ app.use(json());
 app.use(
     cookieSession({
         signed: false,
-        secure: true // Will only return cookie if the query is made with https !!
+        secure: process.env.NODE_ENV !== "test" // "secure: true" => Will only return cookie if the query is made with https !!
     })
 ); 
 
