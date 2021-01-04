@@ -6,6 +6,8 @@ let mongo: any;
 
 // Runs before everything starts
 beforeAll(async() => {
+    process.env.JWT_KEY = "jwtkeyisboss"; // Needed to sign the JWT
+
     mongo = new MongoMemoryServer();
     const mongoUri = await mongo.getUri();
 
