@@ -6,12 +6,13 @@
 // Be careful the name of the file has to be "_app"
 import 'bootstrap/dist/css/bootstrap.css';
 import buildClient from '../api/build-client';
+import Header from '../components/header';
 
 
 const AppComponent =  ({ Component, pageProps, currentUser }) => {
     return (
     <div>
-        <h4>{currentUser?.email || null}</h4>
+        <Header currentUser={currentUser}/>
         <Component {...pageProps} />
     </div>);
 };
