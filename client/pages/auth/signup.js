@@ -1,18 +1,28 @@
 import { useState } from "react";
-import axios from 'axios';
 import useRequest from '../../hooks/use-request';
+import Router from "next/router";
 
 
 const signup = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {doRequest, errors} = useRequest({url:'/api/users/signup', method:'post', body: {email, password}})
+    const {doRequest, errors} = useRequest({
+        url:'/api/users/signup',
+        method:'post',
+        body: {email, password},
+        onSuccess : () => Router.push('/')
+    })
 
     const onSubmit = async (event) => {
         event.preventDefault();
-
-        doRequest();
+        try {
+            await doRequest();
+        } catch (error) {
+            
+        }
+        
+        
         
     };
 

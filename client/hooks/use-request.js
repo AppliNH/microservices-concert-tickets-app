@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-export default ({url, method, body }) => {
+// Must be used inside a react component, not inside another function.
+
+export default ({url, method, body, onSuccess }) => {
     const [errors, setErrors] = useState(null);
 
     const doRequest = async () => {
@@ -10,6 +12,11 @@ export default ({url, method, body }) => {
 
         try {
             const response = await axios[method](url, body);
+
+            if(onSuccess) {
+                onSuccess(response.data); // callback
+            }
+
             return response.data;
         } catch (err) {
             setErrors(
@@ -19,7 +26,9 @@ export default ({url, method, body }) => {
                         {err.response.data.errors.map(error => <li key={error.message}>{error.message}</li> )}
                     </ul>
                 </div>
-            )
+            );
+
+            throw err;
         }
     };
 
