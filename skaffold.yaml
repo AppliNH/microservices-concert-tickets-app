@@ -18,4 +18,11 @@ build:
         manual: 
           - src: 'src/**/*.ts'
             dest: . # where to sync the files to inside the running container
-      
+    - image: tmprimitivo/concert-tickets-app/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual: 
+          - src: '**/*.js'
+            dest: .
