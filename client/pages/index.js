@@ -3,14 +3,15 @@ import buildClient from '../api/build-client';
 
 const LandingPage = ({currentUser}) => {
 
-    
-
-    return <h1>Landing page of {currentUser?.email || null} </h1>;
+    return currentUser ? 
+        <h1>Welcome {currentUser?.email || null}  </h1>
+    :
+        <h1>Not signed in </h1>;
 }
 
 // Called during the server-side rendering process
 LandingPage.getInitialProps = async (context) => {
-    
+
     console.log("[serverside] LandingPage.getInitialProps");
     const client = buildClient(context);
 
@@ -18,7 +19,7 @@ LandingPage.getInitialProps = async (context) => {
         const { data } = await client.get('/api/users/currentuser');
         return data;
     } catch (error) {
-        console.log(error)
+        console.log(error.response.data.errors)
         return {}
     }
 };
