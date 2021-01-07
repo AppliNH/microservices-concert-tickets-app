@@ -1,6 +1,6 @@
 {
   "name": "@react-node-microservices-course/common",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "npm run clean && tsc",
-    "pub": "run(){ git add . && git commit -m \"Updating common package $1 \" && npm version patch && npm run build && npm publish | node_modules/tap-difflet/bin/tap-difflet; }; run"
+    "pub": "run(){ git add . && git commit -m \"Updating common package : $1 \" && npm version patch && npm run build && npm publish && git push | node_modules/tap-difflet/bin/tap-difflet; }; run"
   },
   "keywords": [],
   "author": "thomas.martindev",
