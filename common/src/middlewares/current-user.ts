@@ -1,6 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 import jwt from 'jsonwebtoken';
 import { BadRequestError } from '../errors/bad-request.error';
+import { NotAuthorizedError } from '../errors/not-authorized.error';
 
 interface UserPayload {
     id: string;
@@ -23,7 +24,7 @@ export const currentUser = (
     next: NextFunction
 ) => {
     if(!req.session?.jwt) {
-        throw new BadRequestError('Wrong credentials (no token)');
+        throw new NotAuthorizedError();
     }
     try {
         const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!) as UserPayload;
