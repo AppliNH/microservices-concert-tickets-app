@@ -9,8 +9,12 @@ const start = async() => {
         throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.");
     }
 
+    if(!process.env.MONGO_URI) {
+        throw new Error("No MONGO_URI provided. Use MONGO_URI as key, as env variable.");
+    }
+
     try {
-        await connect('mongodb://auth-mongo-service:27017/', {
+        await connect(`${process.env.MONGO_URI}/tickets`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
@@ -19,7 +23,7 @@ const start = async() => {
         console.error(err);
     }
 
-    console.log("Conencted to auth-mongo !")
+    console.log("Conencted to tickets-mongo !")
 
     app.listen(3000, () => {
         console.log("Listenin' on port 3000");

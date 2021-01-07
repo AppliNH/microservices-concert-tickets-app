@@ -26,3 +26,11 @@ build:
         manual: 
           - src: '**/*.js'
             dest: .
+    - image: tmprimitivo/concert-tickets-app/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual: 
+          - src: 'src/**/*.ts'
+            dest: .

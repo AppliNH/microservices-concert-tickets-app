@@ -9,8 +9,12 @@ const start = async() => {
         throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.");
     }
 
+    if(!process.env.MONGO_URI) {
+        throw new Error("No MONGO_URI provided. Use MONGO_URI as key, as env variable.");
+    }
+
     try {
-        await connect('mongodb://auth-mongo-service:27017/', {
+        await connect(`${process.env.MONGO_URI}/auth`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
