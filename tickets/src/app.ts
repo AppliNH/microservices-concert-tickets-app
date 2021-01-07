@@ -5,7 +5,8 @@ import 'express-async-errors'; // handling errors from async jobs. Just import i
 import {json} from 'body-parser';
 import cookieSession from 'cookie-session';
 
-import { errorHandler,NotFoundError } from '@react-node-microservices-course/common';
+import { currentUser, errorHandler,NotFoundError } from '@react-node-microservices-course/common';
+import { createTicketRouter } from './routes/new';
 
 const app = express();
 app.set('trust proxy', true);
@@ -15,10 +16,13 @@ app.use(
         signed: false,
         secure: process.env.NODE_ENV !== "test"
     })
-); 
+);
+
+// Auth middleware cause tickets is reserved to authenticated users
+app.use(currentUser);
 
 // Routes
-
+app.use(createTicketRouter);
 
 // Handle unknown routes queries, with custom error, to be handled with
 // the custom error handler

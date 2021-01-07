@@ -13,10 +13,12 @@ start-dev:
 # Just publish common package and push code modifications from common/ to the repo
 pub-common:
 	@echo "Publish and push common package changes"
-	cd common/
-	npm run pub
+	cd common/ ; npm run pub
 
 # Reinstall the common pkg from the private npm repo
 sync-common-auth:
-	cd auth/
-	npm i @react-node-microservices-course/common
+	cd auth/ ; npm i @react-node-microservices-course/common
+
+# Reinstall the common pkg from the private npm repo
+sync-common-tickets:
+	cd tickets/ ; npm i @react-node-microservices-course/common
