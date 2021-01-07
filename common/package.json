@@ -1,5 +1,5 @@
 {
-  "name": "@react-node-microservices-course/concert-tickets-app/common",
+  "name": "@react-node-microservices-course/common",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,6 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "thomas.martindev",
   "license": "ISC"
 }
