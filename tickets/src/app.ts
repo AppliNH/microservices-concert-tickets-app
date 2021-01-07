@@ -8,6 +8,7 @@ import cookieSession from 'cookie-session';
 import { currentUser, errorHandler,NotFoundError } from '@react-node-microservices-course/common';
 import { createTicketRouter } from './routes/new';
 import { showTicketRouter } from './routes/show';
+import { showAllTicketsRouter } from './routes/showall';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,11 +20,14 @@ app.use(
     })
 );
 
-// Auth middleware cause tickets is reserved to authenticated users
+app.use(showTicketRouter, showAllTicketsRouter)
+
+// Auth middleware cause some functionalities are reserved to authenticated users
+// Only applies to the routes below it
 app.use(currentUser);
 
 // Routes
-app.use(createTicketRouter, showTicketRouter);
+app.use(createTicketRouter);
 
 // Handle unknown routes queries, with custom error, to be handled with
 // the custom error handler

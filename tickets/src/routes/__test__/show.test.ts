@@ -8,7 +8,6 @@ it('returns a 404 if the ticket is not found', async () => {
     const randomId = mongoose.Types.ObjectId().toHexString();
     await request(app)
         .get(`/api/tickets/${randomId}`)
-        .set("Cookie", generateJWTcookieSession())
         .send()
         .expect(404);
 });
@@ -32,7 +31,6 @@ it('returns the ticket if the ticket is found', async () => {
     
     const ticketResponse = await request(app)
         .get (`/api/tickets/${ticketId}`)
-        .set("Cookie", jwt)
         .send()
         .expect(200);
 
