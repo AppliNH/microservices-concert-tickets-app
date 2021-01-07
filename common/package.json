@@ -1,11 +1,11 @@
 {
   "name": "@react-node-microservices-course/common",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
-    "./build/**/*"
+    "build/**/*"
   ],
   "scripts": {
     "clean": "del ./build/*",
