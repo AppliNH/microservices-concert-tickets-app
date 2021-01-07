@@ -1,9 +1,11 @@
 # Common
 
-## publish
+Holds common stuff to be used by the microservices
 
-npm publish
+## Publish
 
-## inc version
+`npm run pub <COMMIT-MESSAGE>`
 
-npm version patch
+## Inc version
+
+`npm version patch`
