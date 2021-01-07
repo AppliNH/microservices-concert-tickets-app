@@ -1,9 +1,7 @@
 import express, {Request, Response} from 'express';
 import {body} from 'express-validator';
-import { BadRequestError } from '../errors/bad-request.error';
+import { BadRequestError,validateRequest } from '@react-node-microservices-course/common';
 import { User } from '../models/user.model';
-import jwt from 'jsonwebtoken';
-import { validateRequest } from '../middlewares/validate-request';
 import { generateJWT } from '../utils/jwt';
 
 const router = express.Router();

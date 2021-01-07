@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { BadRequestError } from '../errors/bad-request.error';
-import { validateRequest } from '../middlewares/validate-request';
+import { BadRequestError,validateRequest } from '@react-node-microservices-course/common';
 import { User } from '../models/user.model';
 import { Password } from '../utils/password';
 import jwt from 'jsonwebtoken';

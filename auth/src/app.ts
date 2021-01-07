@@ -9,8 +9,7 @@ import {currentUserRouter} from './routes/current-user';
 import { signOutRouter } from './routes/signout';
 import { signUpRouter } from './routes/signup';
 import { signInRouter } from './routes/signin';
-import { errorHandler } from './middlewares/error-handler';
-import NotFoundError from './errors/not-found.error';
+import { errorHandler,NotFoundError } from '@react-node-microservices-course/common';
 
 const app = express();
 app.set('trust proxy', true); // Makes sure that express is being awared of being behind the nginx proxy and accepts trafic
