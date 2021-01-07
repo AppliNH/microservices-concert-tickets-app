@@ -1,6 +1,6 @@
 {
   "name": "@react-node-microservices-course/common",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -15,7 +15,15 @@
   "keywords": [],
   "author": "thomas.martindev",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@types/cookie-session": "^2.0.42",
+    "@types/express": "^4.17.9",
+    "@types/jsonwebtoken": "^8.5.0",
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "jsonwebtoken": "^8.5.1"
+  },
   "devDependencies": {
     "del-cli": "^3.0.1",
     "tap-difflet": "^0.7.2",
