@@ -7,6 +7,7 @@ import cookieSession from 'cookie-session';
 
 import { currentUser, errorHandler,NotFoundError } from '@react-node-microservices-course/common';
 import { createTicketRouter } from './routes/new';
+import { showTicketRouter } from './routes/show';
 
 const app = express();
 app.set('trust proxy', true);
@@ -22,7 +23,7 @@ app.use(
 app.use(currentUser);
 
 // Routes
-app.use(createTicketRouter);
+app.use(createTicketRouter, showTicketRouter);
 
 // Handle unknown routes queries, with custom error, to be handled with
 // the custom error handler
