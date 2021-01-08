@@ -1,10 +1,11 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
 
 const generateJWTcookieSession = () => {
 
     const crendentials = {
         email: "toto@toto.fr",
-        id: "1212myid"
+        id: new mongoose.Types.ObjectId().toHexString() // generate random id
     };
 
     const token = jwt.sign(crendentials, process.env.JWT_KEY!);
