@@ -1,8 +1,11 @@
 import nats, {Message} from 'node-nats-streaming';
+import {randomBytes} from 'crypto';
 
 console.clear();
 
-const stan = nats.connect('ticketing', '123', {
+// Cluster, clientID, options
+// clientID must be unique
+const stan = nats.connect('ticketing', randomBytes(4).toString('hex'), {
     url: 'http://localhost:4222'
 });
 
@@ -11,8 +14,12 @@ const stan = nats.connect('ticketing', '123', {
 stan.on("connect", () => {
     console.log('Listener connected to NATS SS !');
 
-    // Subscribe to a channel.
-    const subscription = stan.subscribe('ticket:created');
+    // Subscribe to a channel, and a queue group.
+    // Queue groups are made so several instances of a listener don't receive several times the same message / event
+    // In short, if you have two instances of one listener "A", and if you set up a queue group, the message / event will go to one instance and not the other one
+    // This is really useful, because it allow to get rid off event duplication for a same listener, which would have conducted to a double-processing.
+    // Ex : on event received, the listener/app push to db. With 2 instances of your listener, it would push twice to db.
+    const subscription = stan.subscribe('ticket:created', 'ordersServiceQueueGroup');
 
     subscription.on('message', (msg: Message) => {
         console.log("Message/Event received.");
@@ -20,7 +27,7 @@ stan.on("connect", () => {
         // messageNumber in the queue
         const messageNumber = msg.getSequence();
         const data = msg.getData().toString();
-        
+
         console.log("#", messageNumber);
         console.log(data);
 
