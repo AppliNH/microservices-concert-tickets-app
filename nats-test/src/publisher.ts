@@ -5,5 +5,18 @@ const stan = nats.connect('ticketing', 'abc', {
 });
 
 stan.on('connect', () => {
-    console.log("Publish connected to NATS Streaming server !")
+    console.log("Publish connected to NATS Streaming server !");
+
+    // Must be stringified to be shared over the NATS SS
+    const data = JSON.stringify({
+        id: "123",
+        title: "concert",
+        price: 60
+    });
+
+    // Channel name(or event type), data (also called message), callback
+    stan.publish('ticket:created', data, () => {
+        console.log("Event published")
+    });
+
 });
