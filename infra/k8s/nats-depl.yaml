@@ -32,4 +32,4 @@ spec:
   - name:  monitoring
     protocol: TCP
     port:  8222
-    targetPort:  8222
+    targetPort:  8222 # http://localhost:8222/streaming
