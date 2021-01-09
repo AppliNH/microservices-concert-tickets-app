@@ -20,3 +20,8 @@ env:
             name: jwt-secret
             key: JWT_KEY
 ```
+
+## Forward a pod's port to your host machine
+
+`k port-forward <pod> <portHost>:<portPod>`
+
