@@ -21,6 +21,9 @@ stan.on("connect", () => {
 
 
     const options = stan.subscriptionOptions()
+        .setDeliverAllAvailable() // Sync up with passed events
+        .setDurableName('my-service') // Durable subscription creates a record in NATS SS so it will know and track which events have been received, and note which has been received or not
+                                        // So it's a bit better than setDeliverAllAvailable, depends on your need.
         .setManualAckMode(true); // Listener has to manually acknowledge the received message / event
                                 // After 30s of no ack received, the server will try to send it to another instance, or just re-send it .
     // Subscribe to a channel, and a queue group.
@@ -30,6 +33,7 @@ stan.on("connect", () => {
     // This is really useful, because it allow to get rid off event duplication for a same listener, which would have conducted to a double-processing.
     // Ex : on event received, the listener/app push to db. With 2 instances of your listener, it would push twice to db.
     
+    // setDeliverAllAvailable + setDurableName + Queue groups => BEST combo to avoid losing events (even if service goes off) and processing duplication (even with several instances)
 
     const subscription = stan.subscribe('ticket:created', 'ordersServiceQueueGroup', options);
 
