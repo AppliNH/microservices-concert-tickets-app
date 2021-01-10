@@ -25,7 +25,7 @@ stan.on("connect", () => {
         .setDurableName('my-service') // Durable subscription creates a record in NATS SS so it will know and track which events have been received, and note which has been received or not
                                         // So it's a bit better than setDeliverAllAvailable, depends on your need.
         .setManualAckMode(true); // Listener has to manually acknowledge the received message / event
-                                // After 30s of no ack received, the server will try to send it to another instance, or just re-send it .
+                                // After 30s ("ack_wait") (by default, and it is customisable!) of no ack received, the server will try to send it to another instance, or just re-send it .
     // Subscribe to a channel, and a queue group.
 
     // Queue groups are made so several instances of a listener don't receive several times the same message / event
