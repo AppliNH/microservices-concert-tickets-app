@@ -14,6 +14,11 @@ const stan = nats.connect('ticketing', randomBytes(4).toString('hex'), {
 stan.on("connect", () => {
     console.log('Listener connected to NATS SS !');
 
+    stan.on('close', () => {
+        console.log("NATS connection close");
+        process.exit();
+    });
+
 
     const options = stan.subscriptionOptions()
         .setManualAckMode(true); // Listener has to manually acknowledge the received message / event
@@ -47,3 +52,8 @@ stan.on("connect", () => {
         msg.ack(); // Trigger acknowledge of message
     });
 });
+// Close connection to NATS SS on signal.
+// This allows to properly close the client, so NATS SS doesn't think the listener has 
+// just crashed and is going to come back.
+process.on('SIGINT', () => stan.close());
+process.on('SIGTERM', () => stan.close());
