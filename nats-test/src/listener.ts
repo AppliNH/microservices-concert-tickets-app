@@ -1,5 +1,6 @@
-import nats, {Message} from 'node-nats-streaming';
+import nats, {Message, Stan} from 'node-nats-streaming';
 import {randomBytes} from 'crypto';
+import Listener from '../models/listener';
 
 console.clear();
 
@@ -61,3 +62,18 @@ stan.on("connect", () => {
 // just crashed and is going to come back.
 process.on('SIGINT', () => stan.close());
 process.on('SIGTERM', () => stan.close());
+
+// ---
+
+
+
+class TicketCreatedListener extends Listener {
+    subject = "ticket:created";
+    queueGroupName = "payments-service";
+
+    onMessage(data: string, msg: Message) {
+        console.log(`Event data : ${data}`);
+        msg.ack();
+    }
+
+}
