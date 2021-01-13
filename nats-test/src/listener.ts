@@ -1,19 +1,7 @@
 import nats, {Message, Stan} from 'node-nats-streaming';
 import {randomBytes} from 'crypto';
-import Listener from '../models/listener';
+import { TicketCreatedListener } from './listeners/ticket-created.listener';
 
-class TicketCreatedListener extends Listener {
-    subject = "ticket:created";
-    queueGroupName = "payments-service";
-
-
-    // onMessage callback
-    onMessage(data: string, msg: Message) {
-        console.log(`Event data : ${data}`);
-        msg.ack(); // Trigger acknowledge of message
-    }
-
-}
 
 console.clear();
 
