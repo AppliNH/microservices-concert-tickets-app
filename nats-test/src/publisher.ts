@@ -9,16 +9,22 @@ const stan = nats.connect('ticketing', 'abc', {
     url: 'http://localhost:4222'
 });
 
-stan.on('connect', () => {
+stan.on('connect', async () => {
     console.log("Publish connected to NATS Streaming server !");
 
     const publisher = new TicketCreatedPublisher(stan);
-    
-    publisher.publish({
-        id: "123",
-        title: "concert",
-        price: 60
-    });
+    try {
+
+        await publisher.publish({
+            id: "123",
+            title: "concert",
+            price: 60
+        });
+
+    } catch(err) {
+        console.error(err);
+    }
+
 
  
 

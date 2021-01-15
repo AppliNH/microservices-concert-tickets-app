@@ -1,3 +1,4 @@
+import { rejects } from "assert";
 import { Stan } from "node-nats-streaming";
 import { Event } from "./event";
 
@@ -9,12 +10,22 @@ export abstract class BasePublisher<T extends Event> {
         this.client = client;
     }
 
-    publish(data: T["data"]) {
+    publish(data: T["data"]): Promise<void> {
     // Data/event must be stringified to be shared over the NATS SS
-            
+        return new Promise<void>((resolve, reject) => {
+            this.client.publish(this.subject, JSON.stringify(data), (err) => {
 
-        this.client.publish(this.subject, JSON.stringify(data), () => {
-            console.log("Event published")
+                if (err) {
+                    return reject(err);
+                }
+
+                console.log("Event published");
+                
+                resolve();
+
+            });
         });
+
+        
     }
 }

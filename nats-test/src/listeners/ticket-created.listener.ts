@@ -12,7 +12,7 @@ export class TicketCreatedListener extends BaseListener<TicketCreatedEvent> {
 
     // onMessage callback
     onMessage(data: TicketCreatedEvent['data'], msg: Message) {
-        console.log(`Event data : ${data}`);
+        console.log(`Event data : ${JSON.stringify(data)}`);
 
         
         msg.ack(); // Trigger acknowledge of message
