@@ -3,6 +3,7 @@
 import request from 'supertest';
 import {app} from '../../app';
 import { Ticket } from '../../models/ticket.model';
+import { natsWrapper } from '../../nats-wrapper';
 import { generateJWTcookieSession } from '../../test/auth-helper';
 
 
@@ -95,5 +96,21 @@ it('creates a ticket with valid inputs', async () => {
 
     expect(tickets[0].title).toEqual('boi');
     expect(tickets[0].price).toEqual(20);
+
+});
+
+it("published an event", async () => {
+
+    await request(app)
+        .post('/api/tickets')
+        .set('Cookie', generateJWTcookieSession())
+        .send({
+            title: "boi",
+            price: 20
+        })
+        .expect(201);
+    
+    // Regular natsWrapper, but is replaced with the mock in test/setup.ts
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
 
 });

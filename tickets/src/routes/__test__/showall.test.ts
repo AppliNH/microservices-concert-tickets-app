@@ -4,6 +4,7 @@ import {app} from "../../app";
 import { generateJWTcookieSession } from '../../test/auth-helper';
 import mongoose from 'mongoose';
 
+
 const createTicket = (title: string, price: number, jwt: string[]) => {
 
     return request(app)

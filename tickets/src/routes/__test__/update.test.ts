@@ -3,7 +3,7 @@ import request from 'supertest';
 import {app} from "../../app";
 import { generateJWTcookieSession } from '../../test/auth-helper';
 import mongoose from 'mongoose';
-
+import { natsWrapper } from '../../nats-wrapper';
 
 
 it('returns a 404 if id doesnt exist', async () => {
@@ -113,5 +113,35 @@ it('updates the tickets if valid inputs', async () => {
 
     expect(ticketResponse.body.title).toEqual("hey");
     expect(ticketResponse.body.price).toEqual(40);
+
+});
+
+it("publishes an event", async () => {
+
+    const jwt = generateJWTcookieSession()
+
+    const response = await request(app)
+        .post('/api/tickets')
+        .set('Cookie',jwt)
+        .send({
+            title: "boi",
+            price: 20
+        })
+        .expect(201);
+
+    const { id } = response.body;
+
+    await request(app)
+    .put(`/api/tickets/${id}`)
+    .set("Cookie", jwt)
+    .send({
+        title:"hey", 
+        price: 40
+    })
+    .expect(200);
+
+    
+    // Regular natsWrapper imported, but is replaced with the mock in test/setup.ts
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
 
 });

@@ -4,6 +4,7 @@ import {app} from "../../app";
 import { generateJWTcookieSession } from '../../test/auth-helper';
 import mongoose from 'mongoose';
 
+
 it('returns a 404 if the ticket is not found', async () => {
     const randomId = mongoose.Types.ObjectId().toHexString();
     await request(app)

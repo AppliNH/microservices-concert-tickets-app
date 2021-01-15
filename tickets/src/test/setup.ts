@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 import {app} from '../app';
 
 
+// Redirects the imports of nats-wrapper to this mock, for the tests
+jest.mock('../nats-wrapper');
+
+
 let mongo: any;
 
 // Runs before everything starts
@@ -21,6 +25,8 @@ beforeAll(async() => {
 
 // Runs before each test starts
 beforeEach(async() => {
+    jest.clearAllMocks();
+
     // get all collections
     const collections = await mongoose.connection.db.collections();
 
