@@ -17,7 +17,15 @@ spec:
         image: tmprimitivo/concert-tickets-app/tickets
         env:
           - name: MONGO_URI
-            value: mongodb://tickets-mongo-service:27017
+            value: 'mongodb://tickets-mongo-service:27017'
+          - name: NATS_URL
+            value: 'http://nats-service:4222'
+          - name: NATS_CLIENT_ID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name # use pod's name
+          - name: NATS_CLUSTER_ID
+            value: ticketing
           - name: JWT_KEY
             valueFrom:
                 secretKeyRef:
