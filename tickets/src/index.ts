@@ -1,5 +1,7 @@
 import {connect} from 'mongoose';
+import {natsWrapper} from './nats-wrapper';
 import {app} from './app';
+import {randomBytes} from "crypto";
 
 
 // startup script
@@ -19,11 +21,23 @@ const start = async() => {
             useUnifiedTopology: true,
             useCreateIndex: true
         });
+
+        // Events-bus connect
+        await natsWrapper.connect("ticketing", randomBytes(4).toString('hex'), "http://nats-service:4222");
+
+        // Handling shutdowns gracefully
+        natsWrapper.client.on('close', () => {
+            console.log("NATS connection closed");
+            process.exit();
+        });
+        process.on('SIGINT', () => natsWrapper.client.close());
+        process.on('SIGTERM', () => natsWrapper.client.close());
+    
     } catch(err) {
         console.error(err);
     }
 
-    console.log("Conencted to tickets-mongo !")
+    console.log("Connected to tickets-mongo !")
 
     app.listen(3000, () => {
         console.log("Listenin' on port 3000");
