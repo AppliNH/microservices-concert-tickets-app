@@ -7,6 +7,6 @@ export * from './models/publisher';
 export * from './models/subjects';
 
 
-export * from './publishers/ticket-created.publisher';
+export * from '../../../tickets/src/publishers/ticket-created.publisher';
 
 export * from './listeners/ticket-created.listener';
