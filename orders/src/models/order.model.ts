@@ -1,5 +1,6 @@
 import mongoose,  { Schema, Document, Model, model } from 'mongoose';
 import {OrderStatus} from '@react-node-microservices-course/common';
+import { TicketDocument } from './ticket.model';
 
 // Model(Attributes): Document
 
@@ -8,7 +9,7 @@ interface OrderAttributes{
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
-    ticket: any;
+    ticket: TicketDocument;
 }
 
 // Describes the properties of a order document (order in mongo)
@@ -16,7 +17,7 @@ interface OrderDocument extends Document {
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
-    ticket: any;
+    ticket: TicketDocument;
 }
 
 // Describes the properties of the order model
