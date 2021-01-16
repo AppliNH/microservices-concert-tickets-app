@@ -12,3 +12,5 @@ export * from './middlewares/validate-request';
 
 
 export * from './nats-events/index';
+
+export * from './types/order-status';
