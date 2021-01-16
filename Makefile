@@ -22,3 +22,7 @@ sync-common-auth:
 # Reinstall the common pkg from the private npm repo
 sync-common-tickets:
 	cd tickets/ ; npm i @react-node-microservices-course/common
+
+# Reinstall the common pkg from the private npm repo
+sync-common-orders:
+	cd orders/ ; npm i @react-node-microservices-course/common

@@ -1,12 +1,12 @@
 import mongoose,  { Schema, Document, Model, model } from 'mongoose';
-
+import {OrderStatus} from '@react-node-microservices-course/common';
 
 // Model(Attributes): Document
 
 // Describes the required properties to create a new order
 interface OrderAttributes{
     userId: string;
-    status: string;
+    status: OrderStatus;
     expiresAt: Date;
     ticket: any;
 }
@@ -14,7 +14,7 @@ interface OrderAttributes{
 // Describes the properties of a order document (order in mongo)
 interface OrderDocument extends Document {
     userId: string;
-    status: string;
+    status: OrderStatus;
     expiresAt: Date;
     ticket: any;
 }
@@ -32,7 +32,9 @@ const orderSchema = new Schema({
     },
     status: {
         type: String,
-        required: true
+        required: true,
+        enum: Object.values(OrderStatus), // Mandatory for enums
+        // default: OrderStatus.Created => default value (not mandatory)
     },
     expiresAt: {
         type: mongoose.Schema.Types.Date,
