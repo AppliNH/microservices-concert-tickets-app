@@ -1,39 +1,46 @@
-import  { Schema, Document, Model, model } from 'mongoose';
+import mongoose,  { Schema, Document, Model, model } from 'mongoose';
 
 
 // Model(Attributes): Document
 
-// Describes the required properties to create a new ticket
+// Describes the required properties to create a new order
 interface OrderAttributes{
-    title: string;
-    price: number;
     userId: string;
+    status: string;
+    expiresAt: Date;
+    ticket: any;
 }
 
-// Describes the properties of a ticket document (ticket in mongo)
+// Describes the properties of a order document (order in mongo)
 interface OrderDocument extends Document {
-    title: string;
-    price: number;
     userId: string;
+    status: string;
+    expiresAt: Date;
+    ticket: any;
 }
 
-// Describes the properties of the ticket model
+// Describes the properties of the order model
 interface OrderModel extends Model<OrderDocument> {
     build(attributes: OrderAttributes): OrderDocument;
 }
 
 
-const ticketSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
+const orderSchema = new Schema({
     userId: {
         type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
+    expiresAt: {
+        type: mongoose.Schema.Types.Date,
+        required: true
+    },
+    ticket: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ticket',
         required: true
     },
 },
@@ -47,14 +54,12 @@ const ticketSchema = new Schema({
     }
 });
 
-// Middleware on saving to db
 
-
-ticketSchema.statics.build = (attributes: OrderAttributes) => {
+orderSchema.statics.build = (attributes: OrderAttributes) => {
     return new Order(attributes);
 };
 
-const Order = model<OrderDocument, OrderModel>("Order", ticketSchema);
+const Order = model<OrderDocument, OrderModel>("Order", orderSchema);
 
 
 export { Order }
