@@ -1,10 +1,14 @@
-import { requireAuth, validateRequest } from '@react-node-microservices-course/common';
+import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from '@react-node-microservices-course/common';
 import express, {Request, Response} from 'express';
 import { body } from 'express-validator';
 import mongoose from 'mongoose';
+import { Order } from '../models/order.model';
+import { Ticket } from '../models/ticket.model';
 
 
 const router = express.Router();
+
+const EXPIRATION_ORDER_SECONDS = 15*60 // TODO: Change to get an env var
 
 router.post(
     '/api/orders',
@@ -18,8 +22,36 @@ router.post(
     ],
     validateRequest,
     async (req: Request, res: Response) => {
+
+        const ticket = await Ticket.findById(req.body.ticketId);
+
+        if (!ticket) {
+            throw new NotFoundError();
+        }
+
+        // Check if ticket is not already reserved in another order
+        const existingOrderWithTicket = await ticket.isReserved();
+
+        if (existingOrderWithTicket) {
+            throw new BadRequestError("Ticket is already reserved by another order");
+        }
+
+        // Order expiration rule
+        const expirationDate = new Date();
+        expirationDate.setSeconds(expirationDate.getSeconds() + EXPIRATION_ORDER_SECONDS);
+
+        const order = Order.build({
+            status: OrderStatus.Created,
+            ticket,
+            userId: req.currentUser!.id,
+            expiresAt: expirationDate
+
+        });
+
+        await order.save();
+
         
-        res.status(200).send({});
+        res.status(201).send(order);
 
     }
 )

@@ -1,6 +1,6 @@
 # Clean minikube
 minikube-clean:
-	minikube delete
+	-minikube delete
 	minikube start
 	minikube addons enable ingress
 

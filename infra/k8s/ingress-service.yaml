@@ -27,7 +27,7 @@ spec:
             backend:
                 serviceName: orders-service
                 servicePort: 3000
-          - path: /?(.*)        # Must stays as the bottom of the list !
+          - path: /(?.*)        # Must stays as the bottom of the list !
             backend:
                 serviceName: client-service
                 servicePort: 3000
