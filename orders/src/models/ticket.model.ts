@@ -7,6 +7,7 @@ import { Order } from './order.model';
 
 // Describes the required properties to create a new ticket
 interface TicketAttributes{
+    id: string
     title: string;
     price: number;
 }
@@ -46,7 +47,11 @@ const ticketSchema = new Schema({
 
 
 ticketSchema.statics.build = (attributes: TicketAttributes) => {
-    return new Ticket(attributes);
+    return new Ticket({
+        _id: attributes.id, // _id is mongoid
+        title: attributes.title,
+        price: attributes.price
+    });
 };
 
 ticketSchema.methods.isReserved = async function() {
