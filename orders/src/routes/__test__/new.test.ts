@@ -75,4 +75,24 @@ it('reserves a ticket', async () => {
     
 });
 
-it.todo('it emits an order created event')
+it('it emits an order created event', async() => {
+    const jwt = generateJWTcookieSession();
+
+
+    const ticket = Ticket.build({
+        title: "concert",
+        price: 50
+    });
+
+    await ticket.save();
+
+    await request(app)
+        .post('/api/orders')
+        .set('Cookie',jwt )
+        .send({
+            ticketId:ticket.id
+        })
+        .expect(201);
+
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
+})

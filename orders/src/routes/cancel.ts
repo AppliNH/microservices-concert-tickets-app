@@ -1,6 +1,8 @@
 import { NotFoundError, OrderStatus, requireAuth } from '@react-node-microservices-course/common';
 import express, {Request, Response} from 'express';
 import { Order } from '../models/order.model';
+import { natsWrapper } from '../nats-wrapper';
+import { OrderCancelledPublisher } from '../publishers/order-cancelled.publisher';
 
 
 const router = express.Router();
@@ -10,7 +12,7 @@ router.patch(
     requireAuth,
     async (req: Request, res: Response) => {
         
-        const order = await Order.findById(req.params.orderId);
+        const order = await Order.findById(req.params.orderId).populate('ticket');
 
         if(!order || order.userId !== req.currentUser!.id) {
             throw new NotFoundError()
@@ -18,6 +20,12 @@ router.patch(
 
         order.status = OrderStatus.Cancelled;
         await order.save();
+
+
+        await new OrderCancelledPublisher(natsWrapper.client).publish({
+            id: order.id,
+            ticket: {id: order.ticket.id}
+        });
 
         res.status(204).send(order);
 
