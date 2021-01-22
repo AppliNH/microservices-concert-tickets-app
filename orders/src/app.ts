@@ -8,7 +8,7 @@ import cookieSession from 'cookie-session';
 import { currentUser, errorHandler,NotFoundError } from '@react-node-microservices-course/common';
 import { showAllOrderRouter } from './routes/showall';
 import { showOrderRouter } from './routes/show';
-import { deleteOrderRouter } from './routes/delete';
+import { cancelOrderRouter } from './routes/cancel';
 import { createOrderRouter } from './routes/new';
 
 
@@ -29,7 +29,7 @@ app.use(
 app.use(currentUser);
 
 // Routes that do need auth
-app.use(showAllOrderRouter, showOrderRouter, deleteOrderRouter, createOrderRouter);
+app.use(showAllOrderRouter, showOrderRouter, cancelOrderRouter, createOrderRouter);
 
 // Handle unknown routes queries, with custom error, to be handled with
 // the custom error handler
