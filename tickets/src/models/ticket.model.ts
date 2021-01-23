@@ -1,5 +1,5 @@
 import  { Schema, Document, Model, model } from 'mongoose';
-
+import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
 
 // Model(Attributes): Document
 
@@ -49,6 +49,7 @@ const ticketSchema = new Schema({
 
 // Middleware on saving to db
 
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 ticketSchema.statics.build = (attributes: TicketAttributes) => {
     return new Ticket(attributes);
