@@ -6,6 +6,7 @@ export interface TicketCreatedEvent {
         id: string;
         title: string;
         price: number;
+        __v: number; // OCC : The service responsible for a Create/Update/Delete on the record is the only one who updates the version number
         userId: string;
     };
 }
