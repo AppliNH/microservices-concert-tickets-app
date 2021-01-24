@@ -6,7 +6,7 @@ export abstract class BasePublisher<T extends Event> {
     abstract subject: T['subject'];// Channel name(or event type)
     
 
-    constructor(private client: Stan) {
+    constructor(protected client: Stan) {
         this.client = client;
     }
 
