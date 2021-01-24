@@ -4,6 +4,7 @@ import {BaseListener} from '@react-node-microservices-course/common';
 import { Subjects } from "@react-node-microservices-course/common";
 import { queueGroupName } from "./queue-group-name";
 import { Ticket } from "../models/ticket.model";
+import { TicketUpdatedPublisher } from "../publishers/ticket-updated.publisher";
 
 // Will allow to lock a ticket if an order is being created for it
 export class OrderCreatedListener extends BaseListener<OrderCreatedEvent> {
@@ -26,6 +27,15 @@ export class OrderCreatedListener extends BaseListener<OrderCreatedEvent> {
         ticket.set({orderId : data.id});
 
         await ticket.save();
+        // Dispatch the updated ticket, with the orderId assigned on it
+        await new TicketUpdatedPublisher(this.client).publish({
+            id: ticket.id,
+            title: ticket.title,
+            price: ticket.price,
+            userId: ticket.userId,
+            __v: ticket.__v!,
+            orderId: ticket.orderId
+        });
         
         msg.ack(); // Trigger acknowledge of message
     }
