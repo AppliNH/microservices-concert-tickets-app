@@ -15,6 +15,7 @@ interface TicketDocument extends Document {
     title: string;
     price: number;
     userId: string;
+    orderId?: string; // shows by which order it is reserved
 }
 
 // Describes the properties of the ticket model
@@ -36,6 +37,9 @@ const ticketSchema = new Schema({
         type: String,
         required: true
     },
+    orderId: { // shows by which order it is reserved
+        type: String,
+    }
 },
 {
     toJSON:{ // Overwrites (or overloads) toJSON function used by mongoose when it comes to turn the data into JSON (for response)
