@@ -28,6 +28,7 @@ it('returns an error if ticket is already reserved', async () => {
     const jwt = generateJWTcookieSession();
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 50
     });
@@ -59,6 +60,7 @@ it('reserves a ticket', async () => {
 
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 50
     });
@@ -80,6 +82,7 @@ it('it emits an order created event', async() => {
 
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 50
     });

@@ -4,6 +4,7 @@ import { app } from '../../app';
 import { Ticket } from '../../models/ticket.model';
 import { generateJWTcookieSession } from '../../test/auth-helper';
 import { natsWrapper } from '../../nats-wrapper';
+import mongoose from 'mongoose';
 
 
 
@@ -13,6 +14,7 @@ it('cancels an order', async () => {
     const jwt1 = generateJWTcookieSession();
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 20
     });
@@ -49,6 +51,7 @@ it('it emits an order cancelled event', async() => {
 
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 50
     });

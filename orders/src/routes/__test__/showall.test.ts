@@ -2,6 +2,7 @@ import { app } from "../../app";
 import request from 'supertest';
 import { Ticket } from "../../models/ticket.model";
 import { generateJWTcookieSession } from "../../test/auth-helper";
+import mongoose from 'mongoose';
 
 it('fetches orders for a particular user', async () => {
 
@@ -9,16 +10,19 @@ it('fetches orders for a particular user', async () => {
     const jwt2 = generateJWTcookieSession();
 
     const ticket1 = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title:"concert1",
         price: 20
     });
 
     const ticket2 = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title:"concert2",
         price: 20
     });
 
     const ticket3 = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title:"concert3",
         price: 20
     });

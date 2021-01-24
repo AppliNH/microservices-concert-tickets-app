@@ -3,13 +3,14 @@ import { app } from '../../app';
 import { Order } from '../../models/order.model';
 import { Ticket } from '../../models/ticket.model';
 import { generateJWTcookieSession } from '../../test/auth-helper';
-
+import mongoose from 'mongoose';
 
 it('fetches the order of an user', async () => {
 
     const jwt1 = generateJWTcookieSession();
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title:"concert",
         price: 20
     });
@@ -44,6 +45,7 @@ it('returns an error if requested order doesnt belong to user', async () => {
     const jwt2 = generateJWTcookieSession();
 
     const ticket = Ticket.build({
+        id: mongoose.Types.ObjectId().toHexString(),
         title:"concert",
         price: 20
     });

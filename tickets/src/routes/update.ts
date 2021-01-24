@@ -49,7 +49,8 @@ router.put(
             id: ticket.id,
             title: ticket.title,
             userId: ticket.userId,
-            price: ticket.price
+            price: ticket.price,
+            __v: ticket.__v!
         });
 
 

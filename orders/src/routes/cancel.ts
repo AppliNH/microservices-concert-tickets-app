@@ -24,7 +24,8 @@ router.patch(
 
         await new OrderCancelledPublisher(natsWrapper.client).publish({
             id: order.id,
-            ticket: {id: order.ticket.id}
+            ticket: {id: order.ticket.id},
+            __v : order.__v!
         });
 
         res.status(204).send(order);

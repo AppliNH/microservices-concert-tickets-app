@@ -1,6 +1,7 @@
 import mongoose,  { Schema, Document, Model, model } from 'mongoose';
 import {OrderStatus} from '@react-node-microservices-course/common';
 import { TicketDocument } from './ticket.model';
+import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
 
 // Model(Attributes): Document
 
@@ -56,6 +57,8 @@ const orderSchema = new Schema({
         }
     }
 });
+
+orderSchema.plugin(updateIfCurrentPlugin);
 
 
 orderSchema.statics.build = (attributes: OrderAttributes) => {

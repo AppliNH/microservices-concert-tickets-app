@@ -1,6 +1,7 @@
 import { OrderStatus } from '@react-node-microservices-course/common';
 import  { Schema, Document, Model, model } from 'mongoose';
 import { Order } from './order.model';
+import {updateIfCurrentPlugin} from 'mongoose-update-if-current';
 
 
 // Model(Attributes): Document
@@ -22,6 +23,7 @@ interface TicketDocument extends Document {
 // Describes the properties of the ticket model
 interface TicketModel extends Model<TicketDocument> {
     build(attributes: TicketAttributes): TicketDocument;
+    findByIdAndPrevVersion(event: { id: string, __v: number }): Promise<TicketDocument | null >;
 }
 
 
@@ -45,6 +47,14 @@ const ticketSchema = new Schema({
     }
 });
 
+ticketSchema.plugin(updateIfCurrentPlugin);
+
+ticketSchema.statics.findByIdAndPrevVersion = (event: { id: string, __v: number }) => {
+    return Ticket.findOne({
+        _id: event.id,
+        __v: event.__v -1
+    });
+};
 
 ticketSchema.statics.build = (attributes: TicketAttributes) => {
     return new Ticket({
