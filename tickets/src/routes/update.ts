@@ -1,4 +1,4 @@
-import { NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from '@react-node-microservices-course/common';
+import { BadRequestError, NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from '@react-node-microservices-course/common';
 import {body} from 'express-validator';
 import express, {Request, Response} from 'express';
 import { Ticket } from '../models/ticket.model';
@@ -34,6 +34,11 @@ router.put(
 
         if(ticket.userId !== req.currentUser!.id) {
             throw new NotAuthorizedError();
+        }
+
+        // If ticket is reserved by an order..
+        if(ticket.orderId != undefined) {
+            throw new BadRequestError("Ticket is reserved by an order, and thus can't be updated");
         }
 
 
