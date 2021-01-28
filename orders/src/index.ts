@@ -4,6 +4,7 @@ import {app} from './app';
 import {randomBytes} from "crypto";
 import { TicketCreatedListener } from './listeners/ticket-created.listener';
 import { TicketUpdatedListener } from './listeners/ticket-updated.listener';
+import { ExpirationCompleteListener } from './listeners/expiration-complete.listener';
 
 
 // startup script
@@ -46,6 +47,7 @@ const start = async() => {
         // Listeners
         new TicketCreatedListener(natsWrapper.client).listen();
         new TicketUpdatedListener(natsWrapper.client).listen();
+        new ExpirationCompleteListener(natsWrapper.client).listen();
 
     } catch(err) {
         console.error(err);
