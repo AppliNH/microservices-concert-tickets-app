@@ -4,6 +4,8 @@ import {body} from 'express-validator';
 import { stripe } from "../stripe";
 import { Order } from "../models/order.model";
 import { Payment } from "../models/payment.model";
+import { PaymentCreatedPublisher } from "../publishers/payment-created.publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 
 const router = express.Router();
@@ -51,6 +53,12 @@ router.post("/api/payments",
         });
 
         await payment.save();
+        
+        await new PaymentCreatedPublisher(natsWrapper.client).publish({
+            id: payment.id,
+            orderId: payment.orderId,
+            stripeId: payment.stripeId
+        })
 
 
         res.status(201).send({success: true})
