@@ -26,6 +26,10 @@ const start = async() => {
         throw new Error("No NATS_CLUSTER_ID provided. Use NATS_CLUSTER_ID as key, as env variable.");
     }
 
+    if(!process.env.STRIPE_KEY) {
+        throw new Error("No STRIPE_KEY provided. Use STRIPE_KEY as key, as env variable.");
+    }
+    
     try {
         await mongoose.connect(`${process.env.MONGO_URI}/payments`, {
             useNewUrlParser: true,

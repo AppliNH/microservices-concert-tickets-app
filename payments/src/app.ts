@@ -6,6 +6,7 @@ import {json} from 'body-parser';
 import cookieSession from 'cookie-session';
 
 import { currentUser, errorHandler,NotFoundError } from '@react-node-microservices-course/common';
+import { createChargeRouter } from './routes/new';
 
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(
 app.use(currentUser);
 
 // Routes that do need auth
-
+app.use(createChargeRouter)
 
 // Handle unknown routes queries, with custom error, to be handled with
 // the custom error handler
