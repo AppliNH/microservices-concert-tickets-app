@@ -15,7 +15,7 @@ pub-common:
 	@echo "Publish and push common package changes"
 	cd common/ ; npm run pub
 
-sync-common-all: sync-common-auth sync-common-tickets sync-common-orders
+sync-common-all: sync-common-auth sync-common-tickets sync-common-orders sync-common-expiration
 
 # Reinstall the common pkg from the private npm repo
 sync-common-auth:
@@ -28,3 +28,7 @@ sync-common-tickets:
 # Reinstall the common pkg from the private npm repo
 sync-common-orders:
 	cd orders/ ; npm i @react-node-microservices-course/common
+
+	# Reinstall the common pkg from the private npm repo
+sync-common-expiration:
+	cd expiration/ ; npm i @react-node-microservices-course/common
