@@ -1,4 +1,4 @@
-import {connect} from 'mongoose';
+import mongoose, {connect} from 'mongoose';
 import {app} from './app';
 
 
@@ -14,11 +14,12 @@ const start = async() => {
     }
 
     try {
-        await connect(`${process.env.MONGO_URI}/auth`, {
+        await mongoose.connect(`${process.env.MONGO_URI}/auth`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
         });
+
     } catch(err) {
         console.error(err);
     }

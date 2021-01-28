@@ -1,4 +1,4 @@
-import {connect} from 'mongoose';
+import mongoose, {connect} from 'mongoose';
 import {natsWrapper} from './nats-wrapper';
 import {app} from './app';
 import {randomBytes} from "crypto";
@@ -27,7 +27,7 @@ const start = async() => {
     }
 
     try {
-        await connect(`${process.env.MONGO_URI}/orders`, {
+        await mongoose.connect(`${process.env.MONGO_URI}/orders`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
