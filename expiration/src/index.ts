@@ -1,3 +1,4 @@
+import { OrderCreatedListener } from './listeners/order-created.listener';
 import {natsWrapper} from './nats-wrapper';
 
 
@@ -11,6 +12,10 @@ const start = async() => {
 
     if(!process.env.NATS_CLUSTER_ID) {
         throw new Error("No NATS_CLUSTER_ID provided. Use NATS_CLUSTER_ID as key, as env variable.");
+    }
+
+    if(!process.env.REDIS_HOST) {
+        throw new Error("No REDIS_HOST provided. Use REDIS_HOST as key, as env variable.");
     }
 
     try {
@@ -27,6 +32,7 @@ const start = async() => {
         process.on('SIGTERM', () => natsWrapper.client.close());
 
         // Listeners
+        new OrderCreatedListener(natsWrapper.client).listen();
         
     
     } catch(err) {

@@ -10,7 +10,7 @@ import { OrderCreatedPublisher } from '../publishers/order-created.publisher';
 
 const router = express.Router();
 
-const EXPIRATION_ORDER_SECONDS = 15*60 // TODO: Change to get an env var
+const EXPIRATION_ORDER_SECONDS = 1*60 // TODO: Change to get an env var
 
 router.post(
     '/api/orders',
