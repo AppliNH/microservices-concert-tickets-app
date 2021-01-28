@@ -2,6 +2,8 @@ import {connect} from 'mongoose';
 import {natsWrapper} from './nats-wrapper';
 import {app} from './app';
 import {randomBytes} from "crypto";
+import { OrderCreatedListener } from './listeners/order-created.listener';
+import { OrderCancelledListener } from './listeners/order-cancelled.listener';
 
 
 
@@ -43,6 +45,8 @@ const start = async() => {
         process.on('SIGTERM', () => natsWrapper.client.close());
 
         // Listeners
+        new OrderCreatedListener(natsWrapper.client).listen();
+        new OrderCancelledListener(natsWrapper.client).listen();
 
     
     } catch(err) {
