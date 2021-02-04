@@ -15,6 +15,12 @@ spec:
       containers:
       - name: client
         image: tmprimitivo/concert-tickets-app/client
+        env:
+          - name: PUBLIC_STRIPE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: stripe-secret
+                key: PUBLIC_STRIPE_KEY
                   
         
 ---

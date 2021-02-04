@@ -13,7 +13,10 @@ const AppComponent =  ({ Component, pageProps, currentUser }) => {
     return (
     <div>
         <Header currentUser={currentUser}/>
-        <Component currentUser={currentUser} {...pageProps} />
+        <div className="container pt-3">
+            <Component currentUser={currentUser} {...pageProps} />
+            {/* ^ currentUser is added as a prop, and now accessible to all child components */}
+        </div>
     </div>);
 };
 
