@@ -1,6 +1,6 @@
 {
-  "name": "@applinh/common",
-  "version": "1.0.25",
+  "name": "@applinh/mcta-common",
+  "version": "1.0.26",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
