@@ -1,6 +1,6 @@
 {
-  "name": "@react-node-microservices-course/common",
-  "version": "1.0.21",
+  "name": "@applinh/common",
+  "version": "1.0.22",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -13,7 +13,7 @@
     "pub": "run(){ npm run build && npm version patch && git add . && git commit -m \"Updating common package : $1 \" && npm publish && git push | node_modules/tap-difflet/bin/tap-difflet; }; run"
   },
   "keywords": [],
-  "author": "thomas.martindev",
+  "author": "applinh",
   "license": "ISC",
   "dependencies": {
     "@types/cookie-session": "^2.0.42",
