@@ -1,4 +1,4 @@
-import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from '@react-node-microservices-course/common';
+import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from '@applinh/mcta-common';
 import express, {Request, Response} from 'express';
 import { body } from 'express-validator';
 import mongoose from 'mongoose';

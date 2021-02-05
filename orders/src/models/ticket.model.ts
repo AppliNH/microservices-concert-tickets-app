@@ -1,4 +1,4 @@
-import { OrderStatus } from '@react-node-microservices-course/common';
+import { OrderStatus } from '@applinh/mcta-common';
 import  { Schema, Document, Model, model } from 'mongoose';
 import { Order } from './order.model';
 import {updateIfCurrentPlugin} from 'mongoose-update-if-current';

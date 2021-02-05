@@ -20,20 +20,20 @@ sync-common-all: sync-common-auth sync-common-tickets sync-common-orders sync-co
 
 # Reinstall the common pkg from the private npm repo
 sync-common-auth:
-	cd auth/ ; npm i @react-node-microservices-course/common
+	cd auth/ ; npm i @applinh/mcta-common
 
 # Reinstall the common pkg from the private npm repo
 sync-common-tickets:
-	cd tickets/ ; npm i @react-node-microservices-course/common
+	cd tickets/ ; npm i @applinh/mcta-common
 
 # Reinstall the common pkg from the private npm repo
 sync-common-orders:
-	cd orders/ ; npm i @react-node-microservices-course/common
+	cd orders/ ; npm i @applinh/mcta-common
 
 # Reinstall the common pkg from the private npm repo
 sync-common-expiration:
-	cd expiration/ ; npm i @react-node-microservices-course/common
+	cd expiration/ ; npm i @applinh/mcta-common
 
 # Reinstall the common pkg from the private npm repo
 sync-common-payments:
-	cd payments/ ; npm i @react-node-microservices-course/common
+	cd payments/ ; npm i @applinh/mcta-common

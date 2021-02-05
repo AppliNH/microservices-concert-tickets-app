@@ -1,6 +1,6 @@
-import { ExpirationCompleteEvent } from "@react-node-microservices-course/common";
-import { BasePublisher } from "@react-node-microservices-course/common";
-import { Subjects } from "@react-node-microservices-course/common";
+import { ExpirationCompleteEvent } from "@applinh/mcta-common";
+import { BasePublisher } from "@applinh/mcta-common";
+import { Subjects } from "@applinh/mcta-common";
 
 export class ExpirationCompletePublisher extends BasePublisher<ExpirationCompleteEvent> {
     subject: Subjects.ExpirationComplete = Subjects.ExpirationComplete;

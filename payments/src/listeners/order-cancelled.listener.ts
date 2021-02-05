@@ -1,7 +1,7 @@
 import { Message } from "node-nats-streaming";
-import { NotFoundError, OrderCancelledEvent, OrderStatus } from "@react-node-microservices-course/common";
-import {BaseListener} from '@react-node-microservices-course/common';
-import { Subjects } from "@react-node-microservices-course/common";
+import { NotFoundError, OrderCancelledEvent, OrderStatus } from "@applinh/mcta-common";
+import {BaseListener} from '@applinh/mcta-common';
+import { Subjects } from "@applinh/mcta-common";
 import { queueGroupName } from "./queue-group-name";
 import { Order } from "../models/order.model";
 

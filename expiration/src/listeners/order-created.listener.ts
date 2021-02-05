@@ -1,7 +1,7 @@
 import { Message } from "node-nats-streaming";
-import { NotFoundError, OrderCreatedEvent } from "@react-node-microservices-course/common";
-import {BaseListener} from '@react-node-microservices-course/common';
-import { Subjects } from "@react-node-microservices-course/common";
+import { NotFoundError, OrderCreatedEvent } from "@applinh/mcta-common";
+import {BaseListener} from '@applinh/mcta-common';
+import { Subjects } from "@applinh/mcta-common";
 import { queueGroupName } from "./queue-group-name";
 import { expirationQueue } from "../queues/expiration.queue";
 

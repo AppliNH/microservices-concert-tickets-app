@@ -1,4 +1,4 @@
-import { currentUser, requireAuth } from '@react-node-microservices-course/common';
+import { currentUser, requireAuth } from '@applinh/mcta-common';
 import express, {Request, Response} from 'express';
 import { Order } from '../models/order.model';
 

@@ -1,4 +1,4 @@
-import { NotFoundError, requireAuth } from '@react-node-microservices-course/common';
+import { NotFoundError, requireAuth } from '@applinh/mcta-common';
 import express, {Request, Response} from 'express';
 import { Order } from '../models/order.model';
 

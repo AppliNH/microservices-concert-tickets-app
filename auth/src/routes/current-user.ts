@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { currentUser } from '@react-node-microservices-course/common';
+import { currentUser } from '@applinh/mcta-common';
 
 const router = express.Router();
 

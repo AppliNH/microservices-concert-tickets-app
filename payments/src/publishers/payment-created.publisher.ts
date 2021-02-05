@@ -1,6 +1,6 @@
-import { PaymentCreatedEvent } from "@react-node-microservices-course/common";
-import { BasePublisher } from "@react-node-microservices-course/common";
-import { Subjects } from "@react-node-microservices-course/common";
+import { PaymentCreatedEvent } from "@applinh/mcta-common";
+import { BasePublisher } from "@applinh/mcta-common";
+import { Subjects } from "@applinh/mcta-common";
 
 export class PaymentCreatedPublisher extends BasePublisher<PaymentCreatedEvent> {
     subject: Subjects.PaymentCreated = Subjects.PaymentCreated;

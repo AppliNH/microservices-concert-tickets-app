@@ -1,4 +1,4 @@
-import { BadRequestError, NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from '@react-node-microservices-course/common';
+import { BadRequestError, NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from '@applinh/mcta-common';
 import {body} from 'express-validator';
 import express, {Request, Response} from 'express';
 import { Ticket } from '../models/ticket.model';

@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@react-node-microservices-course/common": "^1.0.19",
+    "@applinh/mcta-common": "^1.0.26",
     "@types/bull": "^3.15.0",
     "bull": "^3.20.0",
     "node-nats-streaming": "^0.3.2",

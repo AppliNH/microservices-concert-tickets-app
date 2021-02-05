@@ -7,7 +7,7 @@ import { natsWrapper } from '../../nats-wrapper';
 import { generateJWTcookieSession } from '../../test/auth-helper';
 import mongoose from 'mongoose';
 import { Order } from '../../models/order.model';
-import { OrderStatus } from '@react-node-microservices-course/common';
+import { OrderStatus } from '@applinh/mcta-common';
 
 it('returns a 404 if ticket does not exist', async () => {
     const jwt = generateJWTcookieSession();

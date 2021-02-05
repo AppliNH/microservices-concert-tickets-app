@@ -1,6 +1,6 @@
 import { natsWrapper } from "../../nats-wrapper";
 import { TicketUpdatedListener } from "../ticket-updated.listener";
-import {TicketUpdatedEvent} from '@react-node-microservices-course/common';
+import {TicketUpdatedEvent} from '@applinh/mcta-common';
 import mongoose from 'mongoose';
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../models/ticket.model";
