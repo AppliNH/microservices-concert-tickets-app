@@ -1,10 +1,10 @@
 {
   "name": "@applinh/common",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "repository": "github.com/AppliNH/microservices-concert-tickets-app.git",
+  "repository": "git://github.com/AppliNH/microservices-concert-tickets-app.git",
   "files": [
     "build/**/*"
   ],
