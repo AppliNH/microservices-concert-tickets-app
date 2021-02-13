@@ -1,6 +1,6 @@
 node_modules
 .next
-.npmrc
+#.npmrc
 common/build
 
 *.env

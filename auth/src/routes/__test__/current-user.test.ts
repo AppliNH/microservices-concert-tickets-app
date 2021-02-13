@@ -21,6 +21,6 @@ it('throws an error if not authenticated', async () => {
     await request(app) 
         .get('/api/users/currentuser')
         .send()
-        .expect(400);
+        .expect(401);
 
 });
