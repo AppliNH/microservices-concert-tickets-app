@@ -1,0 +1,13 @@
+name: tests-tickets
+on:
+  pull_request:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    
+    steps:
+    - uses: actions/checkout@v2
+    - run: cd tickets && npm i && npm run test:ci
