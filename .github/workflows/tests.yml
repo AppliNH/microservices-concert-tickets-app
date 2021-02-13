@@ -11,4 +11,5 @@ jobs:
        with:
           org_name: applinh
           auth_token: ${{ secrets.GITHUB_TOKEN }}
+     - run: cp .npmrc auth/.npmrc
      - run: cd auth && npm i && npm run test:ci
