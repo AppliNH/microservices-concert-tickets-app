@@ -4,7 +4,7 @@ import {app} from './app';
 
 // startup script
 const start = async() => {
-
+    console.log("Starting auth...")
     if (!process.env.JWT_KEY) {
         throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.");
     }
