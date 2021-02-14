@@ -5,7 +5,6 @@ WORKDIR /app
 COPY .npmrc ./
 COPY package*.json ./
 
-
 RUN npm install --only=prod
 RUN rm -f .npmrc
 COPY . .

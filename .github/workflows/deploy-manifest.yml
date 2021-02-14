@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         
       - name: Get D'O cluster active context to kubectl
-        uses: doctl kubernetes cluster kubeconfig save concert-tickets-app 
+        run: doctl kubernetes cluster kubeconfig save concert-tickets-app 
 
       - name: Apply k8s config
-        uses: kubectl apply -f infra/k8s -f infra/k8s-prod
+        run: kubectl apply -f infra/k8s -f infra/k8s-prod

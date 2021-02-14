@@ -41,8 +41,8 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         
       - name: Get D'O cluster active context to kubectl
-        uses: doctl kubernetes cluster kubeconfig save concert-tickets-app 
+        run: doctl kubernetes cluster kubeconfig save concert-tickets-app 
 
       - name: Restart auth deployment
-        uses: kubectl rollout restart deployment auth-depl
+        run: kubectl rollout restart deployment auth-depl
   
