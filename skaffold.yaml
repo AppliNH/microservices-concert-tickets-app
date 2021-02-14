@@ -10,7 +10,7 @@ build:
   local:
     push: false # Don't try to push the image to a registry, once built
   artifacts:
-    - image: tmprimitivo/concert-tickets-app/auth
+    - image: tmprimitivo/concert-tickets-app_auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -20,7 +20,7 @@ build:
         manual: 
           - src: 'src/**/*.ts'
             dest: . # where to sync the files to inside the running container
-    - image: tmprimitivo/concert-tickets-app/client
+    - image: tmprimitivo/concert-tickets-app_client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -28,7 +28,7 @@ build:
         manual: 
           - src: '**/*.js'
             dest: .
-    - image: tmprimitivo/concert-tickets-app/tickets
+    - image: tmprimitivo/concert-tickets-app_tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -38,7 +38,7 @@ build:
         manual: 
           - src: 'src/**/*.ts'
             dest: .
-    - image: tmprimitivo/concert-tickets-app/orders
+    - image: tmprimitivo/concert-tickets-app_orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -48,7 +48,7 @@ build:
         manual: 
           - src: 'src/**/*.ts'
             dest: .
-    - image: tmprimitivo/concert-tickets-app/expiration
+    - image: tmprimitivo/concert-tickets-app_expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -58,7 +58,7 @@ build:
         manual: 
           - src: 'src/**/*.ts'
             dest: .
-    - image: tmprimitivo/concert-tickets-app/payments
+    - image: tmprimitivo/concert-tickets-app_payments
       context: payments
       docker:
         dockerfile: Dockerfile

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: tmprimitivo/concert-tickets-app/auth
+        image: tmprimitivo/concert-tickets-app_auth
         env:
           - name: MONGO_URI
             value: mongodb://auth-mongo-service:27017

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: expiration
-        image: tmprimitivo/concert-tickets-app/expiration
+        image: tmprimitivo/concert-tickets-app_expiration
         env:
           - name: NATS_URL
             value: 'http://nats-service:4222'

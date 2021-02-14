@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: tmprimitivo/concert-tickets-app/client
+        image: tmprimitivo/concert-tickets-app_client
         env:
           - name: PUBLIC_STRIPE_KEY
             valueFrom:

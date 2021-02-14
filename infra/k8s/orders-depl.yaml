@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: orders
-        image: tmprimitivo/concert-tickets-app/orders
+        image: tmprimitivo/concert-tickets-app_orders
         env:
           - name: MONGO_URI
             value: 'mongodb://orders-mongo-service:27017'
