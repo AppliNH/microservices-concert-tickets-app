@@ -12,7 +12,7 @@ metadata:
 
 spec:
   rules:
-    - host: www.furio.team
+    - host: furio.team
       http:
         paths:
           - path: /api/payments/?(.*)
@@ -42,7 +42,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
-    service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.furio.team'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: 'furio.team'
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
     app.kubernetes.io/name: ingress-nginx
