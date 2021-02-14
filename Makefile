@@ -8,9 +8,16 @@ minikube-clean:
 start-dev:
 	$(MAKE) minikube-clean	
 	kubectl expose deployment ingress-nginx-controller --target-port=80 --type=NodePort -n kube-system
+	$(MAKE) k-secrets
+	skaffold dev
+
+k-secrets:
 	kubectl create secret generic jwt-secret --from-literal=JWT_KEY=jwthash123
 	kubectl create secret generic stripe-secret --from-env-file=./.stripe-secret.env
-	skaffold dev
+
+npm-i-all:
+	npx recursive-install
+
 # Just publish common package and push code modifications from common/ to the repo
 pub-common:
 	@echo "Publish and push common package changes"

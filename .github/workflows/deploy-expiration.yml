@@ -1,11 +1,11 @@
-name: deploy-tickets
+name: deploy-expiration
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'tickets/**'
+      - 'expiration/**'
 
 jobs:
   build:
@@ -28,9 +28,9 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: tickets
+          context: expiration
           push: true
-          tags: tmprimitivo/concert-tickets-app_tickets
+          tags: tmprimitivo/concert-tickets-app_expiration
           build-args: |
             GITHUB_AUTH_TOKEN=${{secrets.GITHUB_TOKEN}}
 
@@ -42,7 +42,7 @@ jobs:
       - name: Get D'O cluster active context to kubectl
         uses: doctl kubernetes cluster kubeconfig save concert-tickets-app 
 
-      - name: Restart tickets deployment
-        uses: kubectl rollout restart deployment tickets-depl
+      - name: Restart expiration deployment
+        uses: kubectl rollout restart deployment expiration-depl
 
   

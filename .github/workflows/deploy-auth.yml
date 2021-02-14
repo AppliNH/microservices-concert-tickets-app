@@ -33,7 +33,16 @@ jobs:
           tags: tmprimitivo/concert-tickets-app_auth
           build-args: |
             GITHUB_AUTH_TOKEN=${{secrets.GITHUB_TOKEN}}
+      
+      
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+      - name: Get D'O cluster active context to kubectl
+        uses: doctl kubernetes cluster kubeconfig save concert-tickets-app 
 
-
-
+      - name: Restart auth deployment
+        uses: kubectl rollout restart deployment auth-depl
   
