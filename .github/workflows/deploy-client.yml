@@ -30,7 +30,7 @@ jobs:
         with:
           context: client
           push: true
-          tags: tmprimitivo/concert-client-app_client
+          tags: tmprimitivo/concert-tickets-app_client
           build-args: |
             GITHUB_AUTH_TOKEN=${{secrets.GITHUB_TOKEN}}
 
