@@ -6,6 +6,7 @@ import {natsWrapper} from './nats-wrapper';
 // startup script
 const start = async() => {
 
+    
     if(!process.env.NATS_URL) {
         throw new Error("No NATS_URL provided. Use NATS_URL as key, as env variable.");
     }

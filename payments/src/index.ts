@@ -10,6 +10,7 @@ import { OrderCancelledListener } from './listeners/order-cancelled.listener';
 // startup script
 const start = async() => {
 
+    
     if (!process.env.JWT_KEY) {
         throw new Error("No JWT key provided. Use JWT_KEY as key, as env variable.");
     }
